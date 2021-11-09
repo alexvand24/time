@@ -179,56 +179,8 @@ pre code {
 </div>
 
 
-<pre class="r"><code># get libraries
-if (!require(librarian)){
-  install.packages(&quot;librarian&quot;)
-  library(librarian)
-}</code></pre>
-<pre><code>## Loading required package: librarian</code></pre>
-<pre><code>## Warning: package &#39;librarian&#39; was built under R version 4.1.1</code></pre>
-<pre class="r"><code>librarian::shelf(
-  clockify, dplyr, DT, glue, lubridate, readr)</code></pre>
-<pre><code>## 
-##   The &#39;cran_repo&#39; argument in shelf() was not set, so it will use
-##   cran_repo = &#39;https://cran.r-project.org&#39; by default.
-## 
-##   To avoid this message, set the &#39;cran_repo&#39; argument to a CRAN
-##   mirror URL (see https://cran.r-project.org/mirrors.html) or set
-##   &#39;quiet = TRUE&#39;.</code></pre>
-<pre><code>## Warning: package &#39;clockify&#39; was built under R version 4.1.1</code></pre>
-<pre><code>## Warning: package &#39;DT&#39; was built under R version 4.1.1</code></pre>
-<pre><code>## Warning: package &#39;glue&#39; was built under R version 4.1.1</code></pre>
-<pre class="r"><code># CHANGE THESE VARIABLES!
-api_txt &lt;- &quot;C:/Users/Alex Vand/Documents/EDS_211/clockify_api_key.txt&quot;
-project_name &lt;- &quot;time&quot;
-
-# use API key to authenticate
-CLOCKIFY_API_KEY &lt;- readLines(api_txt)</code></pre>
-<pre><code>## Warning in readLines(api_txt): incomplete final line found on &#39;C:/Users/Alex
-## Vand/Documents/EDS_211/clockify_api_key.txt&#39;</code></pre>
-<pre class="r"><code>set_api_key(CLOCKIFY_API_KEY)
-
-# get data
-d_projects &lt;- projects() %&gt;% 
-      select(project_id, project_name)
-d_users &lt;- users() %&gt;% 
-      select(user_id, user_name)
-d_times &lt;- time_entries(concise = F) %&gt;% 
-  left_join(
-    d_projects, by = &quot;project_id&quot;) %&gt;% 
-  left_join(
-    d_users, by = &quot;user_id&quot;)
-
-# show table
-d_times %&gt;% 
-  select(
-    user_name, project_name, 
-    time_start, duration, description) %&gt;% 
-  arrange(user_name, project_name, time_start) %&gt;% 
-  datatable() %&gt;%
-  formatRound(columns=c(&#39;duration&#39;), digits=3)</code></pre>
-<div id="htmlwidget-7e7bff8c2bc51a15b471" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7e7bff8c2bc51a15b471">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],["Alex Vand","Alex Vand","Alex Vand"],["jaws|bren","jaws|bren","jaws|bren"],["2021-11-02T18:00:00Z","2021-11-04T18:00:00Z","2021-11-08T17:16:29Z"],[120,180,0.55],["Proposal","Proposal","Clockify setup"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>user_name<\/th>\n      <th>project_name<\/th>\n      <th>time_start<\/th>\n      <th>duration<\/th>\n      <th>description<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"targets":4,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 3, 3, \",\", \".\");\n  }"},{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.columnDefs.0.render"],"jsHooks":[]}</script>
+<div id="htmlwidget-3aa50867127c2c6069f8" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3aa50867127c2c6069f8">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],["Alex Vand","Alex Vand","Alex Vand"],["jaws|bren","jaws|bren","jaws|bren"],["2021-11-02T18:00:00Z","2021-11-04T18:00:00Z","2021-11-08T17:16:29Z"],[120,180,0.55],["Proposal","Proposal","Clockify setup"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>user_name<\/th>\n      <th>project_name<\/th>\n      <th>time_start<\/th>\n      <th>duration<\/th>\n      <th>description<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"targets":4,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatRound(data, 3, 3, \",\", \".\");\n  }"},{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.columnDefs.0.render"],"jsHooks":[]}</script>
 
 
 
